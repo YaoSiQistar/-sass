@@ -1,26 +1,439 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-ink: var(--brand-ink);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-text-1: var(--text-1);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  --background: hsl(220 20% 98%);
+  --foreground: hsl(220 24% 14%);
+  --card: hsl(220 20% 99%);
+  --card-foreground: hsl(220 24% 14%);
+  --popover: hsl(220 18% 98%);
+  --popover-foreground: hsl(220 24% 14%);
+  --primary: hsl(215 45% 42%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(220 16% 94%);
+  --secondary-foreground: hsl(220 20% 22%);
+  --muted: hsl(220 16% 95%);
+  --muted-foreground: hsl(220 10% 44%);
+  --accent: hsl(220 16% 95%);
+  --accent-foreground: hsl(220 20% 22%);
+  --destructive: hsl(0 62% 52%);
+  --border: hsl(220 12% 88%);
+  --input: hsl(220 12% 86%);
+  --ring: hsl(215 45% 42%);
+
+  --brand: hsl(215 45% 42%);
+  --brand-soft: hsl(215 65% 92%);
+  --brand-ink: hsl(215 42% 28%);
+
+  --success: hsl(152 32% 36%);
+  --warning: hsl(40 62% 42%);
+  --info: hsl(200 42% 40%);
+
+  --surface-1: hsl(220 20% 99%);
+  --surface-2: hsl(220 18% 97%);
+
+  --text-1: hsl(220 24% 14%);
+  --text-2: hsl(220 16% 28%);
+  --text-3: hsl(220 10% 44%);
+
+  --shadow-ambient: hsla(220, 12%, 10%, 0.08);
+  --shadow-elevated: hsla(220, 16%, 10%, 0.18);
+  --shadow-surface: 0 1px 2px var(--shadow-ambient);
+  --shadow-popover: 0 10px 30px var(--shadow-elevated),
+    0 2px 6px var(--shadow-ambient);
+  --shadow-overlay: 0 20px 50px var(--shadow-elevated),
+    0 4px 10px var(--shadow-ambient);
+  --shadow-dragging: 0 14px 40px var(--shadow-elevated),
+    0 6px 16px var(--shadow-ambient);
+
+  --rim: hsla(0, 0%, 100%, 0.7);
+  --rim-strong: hsla(0, 0%, 100%, 0.9);
+
+  --texture: repeating-linear-gradient(
+      0deg,
+      hsla(0, 0%, 0%, 0.015) 0px,
+      hsla(0, 0%, 0%, 0.015) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      hsla(0, 0%, 0%, 0.012) 0px,
+      hsla(0, 0%, 0%, 0.012) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+}
+
+.dark {
+  --background: hsl(222 20% 8%);
+  --foreground: hsl(210 40% 96%);
+  --card: hsl(222 18% 11%);
+  --card-foreground: hsl(210 40% 96%);
+  --popover: hsl(222 18% 12%);
+  --popover-foreground: hsl(210 40% 96%);
+  --primary: hsl(215 55% 58%);
+  --primary-foreground: hsl(222 30% 10%);
+  --secondary: hsl(222 14% 16%);
+  --secondary-foreground: hsl(210 40% 92%);
+  --muted: hsl(222 14% 16%);
+  --muted-foreground: hsl(220 10% 64%);
+  --accent: hsl(222 14% 16%);
+  --accent-foreground: hsl(210 40% 92%);
+  --destructive: hsl(0 58% 56%);
+  --border: hsl(222 12% 22%);
+  --input: hsl(222 12% 24%);
+  --ring: hsl(215 55% 58%);
+
+  --brand: hsl(215 55% 58%);
+  --brand-soft: hsl(215 28% 20%);
+  --brand-ink: hsl(215 55% 70%);
+
+  --success: hsl(152 34% 48%);
+  --warning: hsl(40 58% 50%);
+  --info: hsl(200 48% 52%);
+
+  --surface-1: hsl(222 18% 11%);
+  --surface-2: hsl(222 16% 13%);
+
+  --text-1: hsl(210 40% 96%);
+  --text-2: hsl(210 20% 82%);
+  --text-3: hsl(220 10% 64%);
+
+  --shadow-ambient: hsla(220, 30%, 4%, 0.5);
+  --shadow-elevated: hsla(220, 40%, 2%, 0.7);
+  --shadow-surface: 0 1px 2px var(--shadow-ambient);
+  --shadow-popover: 0 12px 36px var(--shadow-elevated),
+    0 2px 8px var(--shadow-ambient);
+  --shadow-overlay: 0 20px 60px var(--shadow-elevated),
+    0 4px 12px var(--shadow-ambient);
+  --shadow-dragging: 0 18px 50px var(--shadow-elevated),
+    0 6px 16px var(--shadow-ambient);
+
+  --rim: hsla(0, 0%, 100%, 0.12);
+  --rim-strong: hsla(0, 0%, 100%, 0.2);
+
+  --texture: repeating-linear-gradient(
+      0deg,
+      hsla(0, 0%, 100%, 0.02) 0px,
+      hsla(0, 0%, 100%, 0.02) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      hsla(0, 0%, 100%, 0.015) 0px,
+      hsla(0, 0%, 100%, 0.015) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .app-root {
+    background-color: var(--background);
+    background-image: var(--texture);
+    background-attachment: fixed;
+  }
+
+  .app-shell {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+
+  .app-main {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  .app-content {
+    padding: 24px;
+  }
+
+  .page-container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 16px;
+  }
+
+  .page-header-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .text-page-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text-1);
+  }
+
+  .text-section-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-2);
+  }
+
+  .text-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  .text-caption {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-3);
+  }
+
+  .text-label {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-2);
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--brand-soft);
+  }
+
+  .elev-surface {
+    box-shadow: var(--shadow-surface);
+  }
+
+  .elev-popover {
+    box-shadow: var(--shadow-popover);
+  }
+
+  .elev-overlay {
+    box-shadow: var(--shadow-overlay);
+  }
+
+  .rim-surface {
+    box-shadow: var(--shadow-surface), inset 0 1px 0 0 var(--rim);
+  }
+
+  .rim-popover {
+    box-shadow: var(--shadow-popover), inset 0 1px 0 0 var(--rim);
+  }
+
+  .rim-overlay {
+    box-shadow: var(--shadow-overlay), inset 0 1px 0 0 var(--rim-strong);
+  }
+
+  .surface-card {
+    background-color: var(--surface-1);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .surface-popover {
+    background-color: var(--surface-2);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+  }
+
+  .table-shell {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background-color: var(--surface-1);
+  }
+
+  .nav-active {
+    position: relative;
+    background-color: var(--brand-soft);
+    color: var(--brand-ink);
+  }
+
+  .nav-active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background-color: var(--brand);
+    border-radius: 999px;
+  }
+
+  .input-control {
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--input);
+    background-color: transparent;
+    padding: 0 12px;
+    font-size: 14px;
+    color: var(--text-1);
+  }
+
+  .input-control::placeholder {
+    color: var(--text-3);
+  }
+
+  .input-control:disabled {
+    opacity: 0.6;
+  }
+
+  .badge-soft {
+    background-color: var(--muted);
+    color: var(--text-2);
+  }
+
+  .badge-brand {
+    background-color: var(--brand-soft);
+    color: var(--brand-ink);
+  }
+
+  .badge-success {
+    background-color: color-mix(in hsl, var(--success) 18%, transparent);
+    color: var(--success);
+  }
+
+  .badge-warning {
+    background-color: color-mix(in hsl, var(--warning) 18%, transparent);
+    color: var(--warning);
+  }
+
+  .badge-danger {
+    background-color: color-mix(in hsl, var(--destructive) 18%, transparent);
+    color: var(--destructive);
+  }
+
+  .section-card {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background-color: var(--surface-1);
+    padding: 16px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .app-divider {
+    height: 1px;
+    width: 100%;
+    background-color: var(--border);
+  }
+
+  .toaster [data-sonner-toast] {
+    background: var(--popover);
+    color: var(--popover-foreground);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-popover), inset 0 1px 0 var(--rim);
+  }
+
+  .toaster [data-sonner-toast] [data-icon] {
+    color: var(--brand-ink);
+  }
+
+  @media (max-width: 768px) {
+    .app-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .app-shell > aside {
+      display: none;
+    }
+
+    .app-content {
+      padding: 16px;
+    }
+  }
 }
